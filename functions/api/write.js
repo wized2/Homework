@@ -69,10 +69,8 @@ export async function onRequest(context) {
           `Entry #${n}: "${subject}" appears more than once.`);
       }
 
+      // page is optional — empty string is allowed
       const page = (e.page ?? '').toString().trim();
-      if (!page) {
-        return respond(400, 'MISSING_PAGE', `Entry #${n} (${subject}): "page" is required.`);
-      }
 
       const description = typeof e.description === 'string' ? e.description.trim() : '';
       if (!description) {

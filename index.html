@@ -145,7 +145,7 @@
   <main>
     <div class="hint">
       <i data-lucide="info"></i>
-      <div>Fill only subjects that have homework. Leave description empty to skip. Students see “No homework” for skipped subjects.</div>
+      <div>Fill only subjects that have homework. Page is optional. Description & notes support multi-line Markdown. Leave description empty to skip a subject.</div>
     </div>
 
     <section class="card">
@@ -198,8 +198,8 @@ SUBJECTS.forEach(([key, label, icon]) => {
       </div>
     </div>
     <div class="grid">
-      <label class="field">Page
-        <input data-field="page" data-subject="${key}" placeholder="e.g. 42 or 42-45" />
+      <label class="field">Page <span style="font-weight:400;opacity:.7">(optional)</span>
+        <input data-field="page" data-subject="${key}" placeholder="e.g. 42 or 42–45" />
       </label>
       <label class="field">Source
         <select data-field="source" data-subject="${key}">
@@ -208,11 +208,11 @@ SUBJECTS.forEach(([key, label, icon]) => {
           <option value="other">Other</option>
         </select>
       </label>
-      <label class="field full">Description
-        <input data-field="description" data-subject="${key}" placeholder="What to do — leave empty to skip" />
+      <label class="field full">Description <span style="font-weight:400;opacity:.7">(Markdown OK)</span>
+        <textarea data-field="description" data-subject="${key}" rows="3" placeholder="What to do — multi-line & Markdown supported. Leave empty to skip."></textarea>
       </label>
-      <label class="field full">Notes (optional)
-        <input data-field="notes" data-subject="${key}" placeholder="e.g. Bring geometry box" />
+      <label class="field full">Notes <span style="font-weight:400;opacity:.7">(optional, Markdown OK)</span>
+        <textarea data-field="notes" data-subject="${key}" rows="2" placeholder="e.g. Bring geometry box"></textarea>
       </label>
     </div>`;
   container.appendChild(el);
@@ -284,7 +284,7 @@ btn.addEventListener('click', async () => {
 });
 
 document.getElementById('clearBtn').addEventListener('click', () => {
-  document.querySelectorAll('input[data-field], select[data-field]').forEach((el) => {
+  document.querySelectorAll('input[data-field], select[data-field], textarea[data-field]').forEach((el) => {
     if (el.tagName === 'SELECT') el.value = 'book';
     else el.value = '';
   });
